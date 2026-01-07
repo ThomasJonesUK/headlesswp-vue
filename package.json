@@ -1,0 +1,16 @@
+{
+  "name": "headlesswp-vue-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Headless WordPress + Vue.js monorepo",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:wordpress\" \"npm run dev:frontend\"",
+    "dev:wordpress": "cd wordpress && php -S localhost:8080",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "npm install && cd frontend && npm install",
+    "setup": "node setup.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
