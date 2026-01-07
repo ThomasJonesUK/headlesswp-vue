@@ -1,7 +1,7 @@
 import { GraphQLClient } from 'graphql-request'
 import { mockNewsItems, mockColours } from './mockData'
 
-const endpoint = 'http://localhost:8080/graphql'
+const endpoint = import.meta.env.VITE_GRAPHQL_ENDPOINT || 'http://localhost:8080/graphql'
 
 export const client = new GraphQLClient(endpoint, {
   headers: {},

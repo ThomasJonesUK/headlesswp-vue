@@ -284,11 +284,22 @@ add_action('acf/init', 'hwp_register_acf_fields');
 
 // Enable CORS for GraphQL
 function hwp_add_cors_headers() {
-    header('Access-Control-Allow-Origin: *');
+    // Get allowed origins from environment or default to localhost in development
+    $allowed_origins = apply_filters('hwp_allowed_origins', [
+        'http://localhost:5173',
+        'http://localhost:5174',
+    ]);
+    
+    $origin = isset($_SERVER['HTTP_ORIGIN']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_ORIGIN'])) : '';
+    
+    if (in_array($origin, $allowed_origins, true)) {
+        header('Access-Control-Allow-Origin: ' . $origin);
+    }
+    
     header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Authorization');
     
-    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
         status_header(200);
         exit();
     }

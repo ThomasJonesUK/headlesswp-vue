@@ -60,9 +60,13 @@ export default {
     openLightbox(index) {
       this.currentImageIndex = index
       this.lightboxOpen = true
+      // Add keyboard listener when lightbox opens
+      document.addEventListener('keydown', this.handleKeyPress)
     },
     closeLightbox() {
       this.lightboxOpen = false
+      // Remove keyboard listener when lightbox closes
+      document.removeEventListener('keydown', this.handleKeyPress)
     },
     nextImage() {
       if (this.currentImageIndex < this.images.length - 1) {
@@ -73,7 +77,24 @@ export default {
       if (this.currentImageIndex > 0) {
         this.currentImageIndex--
       }
+    },
+    handleKeyPress(event) {
+      switch(event.key) {
+        case 'Escape':
+          this.closeLightbox()
+          break
+        case 'ArrowLeft':
+          this.prevImage()
+          break
+        case 'ArrowRight':
+          this.nextImage()
+          break
+      }
     }
+  },
+  beforeUnmount() {
+    // Clean up keyboard listener if component is destroyed while lightbox is open
+    document.removeEventListener('keydown', this.handleKeyPress)
   }
 }
 </script>
