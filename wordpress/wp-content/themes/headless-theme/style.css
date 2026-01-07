@@ -1,0 +1,15 @@
+/*
+Theme Name: Headless Theme
+Description: Minimal theme for headless WordPress
+Version: 1.0.0
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}

@@ -1,0 +1,20 @@
+{
+  "name": "headless-wp/wordpress",
+  "description": "Headless WordPress setup with SQLite",
+  "type": "project",
+  "require": {
+    "php": ">=7.4"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "extra": {
+    "installer-paths": {
+      "wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "wp-content/themes/{$name}/": ["type:wordpress-theme"]
+    }
+  }
+}
